@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @EnableAutoConfiguration
 public class SampleController {
 	
- 	@RequestMapping(value="")
+ 	@RequestMapping(value="/sample")
     @ResponseBody
     public String sampleHome() {
         
-        return "Hello Spring Boot!";
+        return "Hello Spring Boot! : SampleController.java ~";
         
     }
 }
