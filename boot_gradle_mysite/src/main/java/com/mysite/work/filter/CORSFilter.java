@@ -26,13 +26,17 @@ public class CORSFilter implements Filter {
 	
 	private List<String> whiteList;
 	private List<String> resourceList;
+	private boolean filterYn =false;
 	
 	public CORSFilter() {
+		
+		
 		
 		whiteList = new ArrayList<String>();
 		//whiteList.add("/");
 		whiteList.add("/loginMain");
 		whiteList.add("/user/loginPost");
+		whiteList.add("/board/getBoardList");
 		
 		resourceList = new ArrayList<String>();
 		resourceList.add("/resources");
@@ -52,6 +56,7 @@ public class CORSFilter implements Filter {
 		String uri =req.getRequestURI();
 		logger.debug("uri :"+uri);
 		
+		if(filterYn) {
 
 		if(!whiteList.contains(uri)) {
 			
@@ -78,6 +83,8 @@ public class CORSFilter implements Filter {
 				return;
 				}
 			}
+		}
+		
 		}
 			
 			logger.info("##### filter - before #####");

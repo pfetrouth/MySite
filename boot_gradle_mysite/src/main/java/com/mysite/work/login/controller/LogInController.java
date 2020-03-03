@@ -72,7 +72,7 @@ import com.mysite.work.mapper.login.LogInMapper;;
 	    
 	    @RequestMapping(value="/loginMain") 
 	    public String loginMain() throws Exception{
-	         	return "/user/login"; 
+	         	return "/user/loginDo"; 
 
 	    }
 	 

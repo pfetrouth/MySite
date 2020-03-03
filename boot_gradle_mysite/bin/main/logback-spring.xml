@@ -51,7 +51,7 @@
     <logger name="com.mysite" level="error">
         <appender-ref ref="ERRORS" />
     </logger>
-    <logger name="com.mysite.work.login.controller" level="trace">
+    <logger name="com.mysite" level="trace">
         <appender-ref ref="ROLLING" />
     </logger>
 

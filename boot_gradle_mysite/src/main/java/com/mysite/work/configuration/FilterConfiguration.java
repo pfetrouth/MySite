@@ -15,7 +15,7 @@ public class FilterConfiguration implements WebMvcConfigurer {
 	@Bean
 	public FilterRegistrationBean getFilterRegistrationBean() {
 		FilterRegistrationBean registrationBean = new FilterRegistrationBean(new CORSFilter());
-		registrationBean.setOrder(Integer.MIN_VALUE);
+				registrationBean.setOrder(Integer.MIN_VALUE);
 		//registrationBean.addUrlPatterns("/*");
 		registrationBean.setUrlPatterns(Arrays.asList("/*"));
 		return registrationBean;
