@@ -12,6 +12,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mysite.work.board.service.BoardService;
 import com.mysite.work.board.vo.BoardVO;
+import com.mysite.work.common.vo.Pagination;
+import com.mysite.work.common.vo.Search;
 
 @Controller
 @RequestMapping(value = "/board")
@@ -22,19 +24,44 @@ public class BoardController {
 
 
 	@RequestMapping(value = "/getBoardList", method = RequestMethod.GET)
-	public String getBoardList(Model model) throws Exception {
-		model.addAttribute("boardList", boardService.getBoardList());
+	public String getBoardList(Model model
+			, @RequestParam(required = false, defaultValue = "1") int page
+			, @RequestParam(required = false, defaultValue = "1") int range
+			, @RequestParam(required = false, defaultValue = "title") String searchType
+			, @RequestParam(required = false) String keyword		) throws Exception {
+		
+		Search search = new Search();
+		search.setSearchType(searchType);
+		search.setKeyword(keyword);
+
+		//전체 게시글 개수
+		int listCnt = boardService.getBoardListCnt(search);
+		//Pagination 객체생성
+		search.pageInfo(page, range, listCnt);
+		model.addAttribute("pagination", search);
+		model.addAttribute("boardList", boardService.getBoardList(search));
 		return "/board/index";
 	}
 	
 	@RequestMapping(value = "/boardForm")
-	public String boardForm() throws Exception {	 
+	public String boardForm(Model model) throws Exception {	 
+		model.addAttribute("boardVO", new BoardVO());
 		return "/board/boardForm";
 	}
 
-	@RequestMapping(value = "/saveBoard", method=RequestMethod.POST)
+	@RequestMapping(value = "/saveBoard_prev", method=RequestMethod.POST)
 	public String saveForm(@ModelAttribute("BoardVO") BoardVO boardVO, RedirectAttributes rttr) throws Exception {
 		boardService.insertBoard(boardVO);
+		return "redirect:/board/getBoardList";
+	}
+
+	@RequestMapping(value = "/saveBoard", method=RequestMethod.POST)
+	public String saveForm(@ModelAttribute("BoardVO") BoardVO boardVO, @RequestParam("mode") String mode, RedirectAttributes rttr) throws Exception {
+		if (mode.equals("edit")) {
+			boardService.updateBoard(boardVO);
+		} else {
+			boardService.insertBoard(boardVO);
+		}
 		return "redirect:/board/getBoardList";
 	}
 
@@ -43,4 +70,27 @@ public class BoardController {
 		model.addAttribute("boardContent",boardService.getBoardContent(bid));
 		return "/board/boardContent";
 	}
+	@RequestMapping(value = "/editForm", method = RequestMethod.GET)
+	public String editForm(@RequestParam("bid") int bid, @RequestParam("mode") String mode, Model model) throws Exception {
+		model.addAttribute("boardContent", boardService.getBoardContent(bid));
+		model.addAttribute("mode", mode);
+		model.addAttribute("boardVO", new BoardVO());
+		return "/board/boardForm";
+	}
+	
+	@RequestMapping(value = "/deleteBoard", method=RequestMethod.GET)
+	public String delteBoard( @RequestParam("bid") int bid, RedirectAttributes rttr) throws Exception {
+		 
+			boardService.deleteBoard(bid);
+			
+		return "redirect:/board/getBoardList";
+	}
+	@RequestMapping(value = "/test", method=RequestMethod.GET)
+	public String testInsertBoard() throws Exception {
+		 
+			boardService.testInsertBoard();
+			
+		return "redirect:/board/getBoardList";
+	} 
+
 }	

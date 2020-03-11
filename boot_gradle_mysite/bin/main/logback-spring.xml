@@ -21,7 +21,7 @@
             <fileNamePattern>${LOGS_ABSOLUTE_PATH}/logback.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!-- or whenever the file size reaches 100MB -->
-                <maxFileSize>1MB</maxFileSize>
+                <maxFileSize>100MB</maxFileSize>
                 <!-- kb, mb, gb -->
             </timeBasedFileNamingAndTriggeringPolicy>
             <maxHistory>30</maxHistory>
@@ -57,6 +57,7 @@
 
     <root level="INFO">
         <appender-ref ref="STDOUT" />
+
     </root>
 </configuration>
  

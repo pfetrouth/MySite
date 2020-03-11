@@ -21,23 +21,22 @@ import com.mysite.work.login.controller.RestfulAPISample;
 import com.mysite.work.login.vo.MemberVO;
 
 public class CORSFilter implements Filter {
-	
+
 	Logger logger = LoggerFactory.getLogger(RestfulAPISample.class);
-	
+
 	private List<String> whiteList;
 	private List<String> resourceList;
-	private boolean filterYn =false;
-	
+	private boolean filterYn = false;
+
 	public CORSFilter() {
-		
-		
-		
+
 		whiteList = new ArrayList<String>();
-		//whiteList.add("/");
+		// whiteList.add("/");
 		whiteList.add("/loginMain");
 		whiteList.add("/user/loginPost");
 		whiteList.add("/board/getBoardList");
-		
+		whiteList.add("/health");
+
 		resourceList = new ArrayList<String>();
 		resourceList.add("/resources");
 	}
@@ -48,51 +47,49 @@ public class CORSFilter implements Filter {
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		boolean isURIResouceFile =false;
-		
-		String uri =req.getRequestURI();
-		logger.debug("uri :"+uri);
-		
-		if(filterYn) {
+		boolean isURIResouceFile = false;
 
-		if(!whiteList.contains(uri)) {
-			
-			for(String resouce : resourceList) {
-				
-				logger.debug("resouce :"+resouce);
-				
-				if(uri.startsWith(resouce)) {
-					isURIResouceFile = true;
-					break;
+		String uri = req.getRequestURI();
+		logger.debug("uri :" + uri);
+
+		if (filterYn) {
+
+			if (!whiteList.contains(uri)) {
+
+				for (String resouce : resourceList) {
+
+					logger.debug("resouce :" + resouce);
+
+					if (uri.startsWith(resouce)) {
+						isURIResouceFile = true;
+						break;
+					}
+				}
+				logger.debug("isURIResouceFile :" + isURIResouceFile);
+				if (!isURIResouceFile) {
+
+					HttpServletRequest hsreq = (HttpServletRequest) request;
+					HttpSession session = hsreq.getSession();
+					MemberVO vo = (MemberVO) session.getAttribute("memberInfo");
+					logger.debug("vo :" + vo);
+
+					if (vo == null) {
+						res.sendRedirect("loginMain");
+						return;
+					}
 				}
 			}
-			logger.debug("isURIResouceFile :"+isURIResouceFile);
-			if(!isURIResouceFile) {
-		
-			HttpServletRequest hsreq = (HttpServletRequest)request;
-			HttpSession session = hsreq.getSession();
-			MemberVO vo =(MemberVO)session.getAttribute("memberInfo");
-			logger.debug("vo :"+vo);
-			
-			
-			if(vo ==null) {
-				res.sendRedirect("loginMain");
-				return;
-				}
-			}
+
 		}
-		
-		}
-			
-			logger.info("##### filter - before #####");
-			chain.doFilter(req, res);
-			logger.info("##### filter - after #####");
-		
+		logger.info("##### filter - before #####");
+		chain.doFilter(req, res);
+		logger.info("##### filter - after #####");
 	}
-	
+
 	@Override
 	public void destroy() {
 		logger.info("destroy CORSFilter");
