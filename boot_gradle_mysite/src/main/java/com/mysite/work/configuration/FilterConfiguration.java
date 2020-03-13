@@ -13,8 +13,8 @@ import com.mysite.work.filter.CORSFilter;
 public class FilterConfiguration implements WebMvcConfigurer {
 	
 	@Bean
-	public FilterRegistrationBean getFilterRegistrationBean() {
-		FilterRegistrationBean registrationBean = new FilterRegistrationBean(new CORSFilter());
+	public FilterRegistrationBean<CORSFilter> getFilterRegistrationBean() {
+		FilterRegistrationBean<CORSFilter> registrationBean = new FilterRegistrationBean<CORSFilter>(new CORSFilter());
 				registrationBean.setOrder(Integer.MIN_VALUE);
 		//registrationBean.addUrlPatterns("/*");
 		registrationBean.setUrlPatterns(Arrays.asList("/*"));

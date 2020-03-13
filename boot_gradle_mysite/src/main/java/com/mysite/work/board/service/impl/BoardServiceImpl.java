@@ -16,7 +16,6 @@ import com.mysite.work.common.vo.Search;
 
 
 	@Service
-
 	public class BoardServiceImpl implements BoardService{
 		
 		Logger logger = LoggerFactory.getLogger(BoardServiceImpl.class);

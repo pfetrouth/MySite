@@ -17,6 +17,7 @@ public class HealthCheckVO {
 	private String hostName;
 	private String serviceCode;
 	private String message;
+	private int dbCnt;
 	
 	public String getIp() {
 		return ip;
@@ -51,7 +52,7 @@ public class HealthCheckVO {
 	@Override
 	public String toString() {
 		return "HealthCheckVO [ip=" + ip + ", port=" + port + ", url=" + url + ", aliveYn=" + aliveYn + ", hostName="
-				+ hostName + ", serviceCode=" + serviceCode + ", message=" + message + "]";
+				+ hostName + ", serviceCode=" + serviceCode + ", message=" + message + ", dbCnt=" + dbCnt + "]";
 	}
 	public String getServiceCode() {
 		return serviceCode;
@@ -64,6 +65,12 @@ public class HealthCheckVO {
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	public int getDbCnt() {
+		return dbCnt;
+	}
+	public void setDbCnt(int dbCnt) {
+		this.dbCnt = dbCnt;
 	}
 
 }

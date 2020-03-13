@@ -11,8 +11,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+
+//@SpringBootApplication(scanBasePackages={"com.mysite.work"})
 @SpringBootApplication
 @MapperScan(value= {"com.mysite.work.mapper"})
+
 public class BootGradleMysiteApplication {
 
 	public static void main(String[] args) {

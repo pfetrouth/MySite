@@ -14,14 +14,14 @@ import com.mysite.work.board.service.BoardService;
 import com.mysite.work.board.vo.BoardVO;
 import com.mysite.work.common.vo.Pagination;
 import com.mysite.work.common.vo.Search;
+import com.mysite.work.health.service.HealthService;
 
 @Controller
 @RequestMapping(value = "/board")
 public class BoardController {
 
 	@Inject
-	private BoardService boardService;
-
+	private BoardService boardService; 
 
 	@RequestMapping(value = "/getBoardList", method = RequestMethod.GET)
 	public String getBoardList(Model model
