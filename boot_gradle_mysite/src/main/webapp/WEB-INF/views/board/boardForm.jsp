@@ -13,6 +13,7 @@
 
 <meta charset="UTF-8">
 <title>board</title>
+<script src="https://cdn.ckeditor.com/ckeditor5/17.0.0/classic/ckeditor.js"></script>
 <script>
 	$(document).on('click', '#btnSave', function(e) {
 		e.preventDefault();
@@ -88,10 +89,16 @@
 					<label for="content">내용</label>
 
 					<form:textarea path="content" id="content" class="form-control" rows="5" placeholder="내용을 입력해 주세요" />
-
+					<script>
+				    // 3. CKEditor5를 생성할 textarea 지정
+				    ClassicEditor
+				        .create( document.querySelector( '#content' ) )
+				        .catch( error => {
+				            console.error( error );
+				        } );
+				    </script>
 				</div>
-
-
+				
 
 				<div class="mb-3">
 
@@ -117,4 +124,5 @@
 
 </body>
 
+ 
 </html>

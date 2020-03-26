@@ -3,6 +3,7 @@ package com.mysite.work.board.dao;
 import java.util.List;
 
 import com.mysite.work.board.vo.BoardVO;
+import com.mysite.work.board.vo.ReplyVO;
 import com.mysite.work.common.vo.Pagination;
 import com.mysite.work.common.vo.Search;
 
@@ -18,6 +19,11 @@ public interface BoardDAO {
 	public int updateBoard(BoardVO boardVO) throws Exception;
 	public int deleteBoard(int bid) throws Exception;
 	public int updateViewCnt(int bid) throws Exception; 
+	
+	public List<ReplyVO> getReplyList(int bid) throws Exception;
+	public int saveReply(ReplyVO replyVO) throws Exception;
+	public int updateReply(ReplyVO replyVO) throws Exception;
+	public int deleteReply(int rid) throws Exception;
 
 }
  

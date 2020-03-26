@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mysite.work.login.userMapper">
+	<select id="getUserInfo"
+		resultType="com.mysite.work.login.vo.UserVO"> SELECT UID , NAME , PWD , EMAIL , GRADE , REG_DT FROM
+		COM01.TBL_USER WHERE UID = #{uid} </select>
+		
+	<select id="getUserList"
+		resultType="com.mysite.work.login.vo.UserVO"> SELECT UID , NAME , PWD , EMAIL , GRADE , REG_DT FROM
+		COM01.TBL_USER </select>
+	
+	<insert id="insertUser"
+		parameterType="com.mysite.work.login.vo.UserVO"> INSERT INTO COM01.TBL_USER (UID, NAME, PWD, EMAIL, REG_DT)
+		VALUES ( #{uid} , #{name} , #{pwd} , #{email} , now() ) </insert>
+	
+	<update id="updateUser"
+		parameterType="com.mysite.work.login.vo.UserVO"> UPDATE COM01.TBL_USER SET NAME = #{name} , PWD = #{pwd} ,
+		EMAIL = #{email} , GRADE = #{grade} WHERE UID = #{uid} </update>
+	
+	<delete id="deleteUser" parameterType="int"> DELETE FROM COM01.TBL_USER
+		WHERE UID = #{uid} </delete>
+		
+</mapper>

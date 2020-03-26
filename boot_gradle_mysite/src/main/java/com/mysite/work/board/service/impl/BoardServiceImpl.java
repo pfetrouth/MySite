@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.mysite.work.board.dao.BoardDAO;
 import com.mysite.work.board.service.BoardService;
 import com.mysite.work.board.vo.BoardVO;
+import com.mysite.work.board.vo.ReplyVO;
 import com.mysite.work.common.vo.Pagination;
 import com.mysite.work.common.vo.Search; 
 
@@ -69,16 +70,27 @@ import com.mysite.work.common.vo.Search;
 		public BoardVO getBoardContent( int bid) throws Exception{
 			
 			BoardVO vo = boardDAO.getBoardContent(bid);
-			boardDAO.updateViewCnt(bid);
-//			
-//			vo.setBid(bid);
-//			vo.setCate_cd("1111111111111111111111111111111111111");
-//			boardDAO.updateBoard(vo);
-			
-			
-			
+			boardDAO.updateViewCnt(bid);			
 			return vo;
 		}
+		
+		// 댓글 리스트
+		public List<ReplyVO> getReplyList(int bid) throws Exception{
+			
+			return boardDAO.getReplyList(bid);
+		}
+		public int saveReply(ReplyVO replyVO) throws Exception{
+			
+			return boardDAO.saveReply(replyVO);
+		}
+		public int updateReply(ReplyVO replyVO) throws Exception{
+			
+			return boardDAO.updateReply(replyVO);
+		}
+		public int deleteReply(int rid) throws Exception{
+			
+			return boardDAO.deleteBoard(rid);
+		};
 		 
 		public void testInsertBoard() throws Exception {
 

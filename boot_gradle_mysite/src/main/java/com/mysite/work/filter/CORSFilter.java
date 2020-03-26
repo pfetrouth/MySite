@@ -22,7 +22,7 @@ import com.mysite.work.login.vo.MemberVO;
 
 public class CORSFilter implements Filter {
 
-	Logger logger = LoggerFactory.getLogger(RestfulAPISample.class);
+	Logger logger = LoggerFactory.getLogger(CORSFilter.class);
 
 	private List<String> whiteList;
 	private List<String> resourceList;

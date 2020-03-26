@@ -12,9 +12,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mysite.work.board.service.BoardService;
 import com.mysite.work.board.vo.BoardVO;
-import com.mysite.work.common.vo.Pagination;
+import com.mysite.work.board.vo.ReplyVO;
 import com.mysite.work.common.vo.Search;
-import com.mysite.work.health.service.HealthService;
 
 @Controller
 @RequestMapping(value = "/board")
@@ -68,7 +67,9 @@ public class BoardController {
 	@RequestMapping(value = "/getBoardContent", method=RequestMethod.GET)
 	public String getBoardContent(Model model, @RequestParam("bid") int bid) throws Exception {
 		model.addAttribute("boardContent",boardService.getBoardContent(bid));
-		return "/board/boardContent";
+		//model.addAttribute("replyVO",boardService.getReplyList(bid));
+		model.addAttribute("replyVO",new ReplyVO());
+		return "/board/boardContent"; 
 	}
 	@RequestMapping(value = "/editForm", method = RequestMethod.GET)
 	public String editForm(@RequestParam("bid") int bid, @RequestParam("mode") String mode, Model model) throws Exception {

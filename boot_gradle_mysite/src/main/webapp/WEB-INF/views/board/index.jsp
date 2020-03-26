@@ -1,6 +1,7 @@
++
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/WEB-INF/views/layout/header.jsp"%> 
+<%@ include file="/WEB-INF/tiles/layouts/header.jsp"%> 
 
 <!DOCTYPE html>
 
@@ -19,12 +20,13 @@
 </c:url>
 <script>
 
+
 $(document).on('click', '#btnSearch', function(e){
 	e.preventDefault();
 	//var url = "${pageContext.request.contextPath}/board/getBoardList";
-	//var url = "${getBoardListURL}";
-	var url = "${getBoardList}";
-	url = url + "&searchType=" + $('#searchType').val();
+	var url = "${getBoardListURL}";
+	//var url = "${getBoardList}";
+	url = url + "?searchType=" + $('#searchType').val();
 	url = url + "&keyword=" + $('#keyword').val();
 	location.href = url;
 	console.log(url);

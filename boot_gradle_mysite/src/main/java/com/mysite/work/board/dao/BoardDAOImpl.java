@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.mysite.work.board.vo.BoardVO;
+import com.mysite.work.board.vo.ReplyVO;
 import com.mysite.work.common.vo.Pagination;
 import com.mysite.work.common.vo.Search;
 
@@ -67,5 +68,24 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.update("com.mysite.work.mapper.board.BoardMapper.updateViewCnt", bid);
 	}
 	
+	 // 댓글 리스트
+	@Override
+	public List<ReplyVO> getReplyList(int bid) throws Exception {
+		return sqlSession.selectList("com.mysite.work.mapper.board.replyMapper.getReplyList", bid);
+	}
+	@Override
+	public int saveReply(ReplyVO replyVO) throws Exception {
+		return sqlSession.insert("com.mysite.work.mapper.board.replyMapper.saveReply", replyVO);
+	}
+
+	@Override
+	public int updateReply(ReplyVO replyVO) throws Exception {
+		return sqlSession.update("com.mysite.work.mapper.board.replyMapper.updateReply", replyVO);
+	}
+
+	@Override
+	public int deleteReply(int rid) throws Exception {
+		return sqlSession.delete("com.mysite.work.mapper.board.replayMapper.deleteReply", rid);
+	} 
 }
  
