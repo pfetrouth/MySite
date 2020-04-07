@@ -1,12 +1,13 @@
-package com.mysite.work.login.vo;
+package com.mysite.work.user.vo;
 
 public class UserVO {
-	  String uid ;
-	  String name ;
-	  String pwd ;
-	  String email ;
-	  String grade ;
-	  String reg_dt ;
+	String uid;
+	String name;
+	String pwd;
+	String re_pwd;
+	String email;
+	String grade;
+	String reg_dt;
 	public String getUid() {
 		return uid;
 	}
@@ -24,6 +25,12 @@ public class UserVO {
 	}
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
+	}
+	public String getRe_pwd() {
+		return re_pwd;
+	}
+	public void setRe_pwd(String re_pwd) {
+		this.re_pwd = re_pwd;
 	}
 	public String getEmail() {
 		return email;
@@ -45,7 +52,7 @@ public class UserVO {
 	}
 	@Override
 	public String toString() {
-		return "UserVO [uid=" + uid + ", name=" + name + ", pwd=" + pwd + ", email=" + email + ", grade=" + grade
-				+ ", reg_dt=" + reg_dt + "]";
+		return "UserVO [uid=" + uid + ", name=" + name + ", pwd=" + pwd + ", re_pwd=" + re_pwd + ", email=" + email
+				+ ", grade=" + grade + ", reg_dt=" + reg_dt + "]";
 	}
 }

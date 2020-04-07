@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mysite.work.login.vo.LoginVO;
+//import com.mysite.work.login.vo.LoginVO;
 import com.mysite.work.login.vo.MemberVO;
 import com.mysite.work.mapper.login.LogInMapper;
 
@@ -23,28 +23,30 @@ public class RestfulAPISample {
     @GetMapping(value="/rest") 
     public List<MemberVO> home() throws Exception{
         
-        //List<MemberVO> list = mapper.selectMemberList();
-    	LoginVO vo = new LoginVO();
-    	List<MemberVO> list = mapper.doLoginList(vo);
-        
-        for(int i=0; i<list.size(); i++){
-            System.out.println("name : " + list.get(i).getName());
-            System.out.println("resno : " + list.get(i).getResno());
-        }        
-       
-        ObjectMapper mapper = new ObjectMapper();
-        
-        String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
-        
-        System.out.println("json : " + json);        
-        
-		
-		logger.trace("trace -- Hello world.");
-		logger.debug("debug -- Hello world.");
-		logger.info("info -- Hello world.");
-		logger.warn("warn -- Hello world.");
-		logger.error("error -- Hello world.");
-  
-        return list;
+//        //List<MemberVO> list = mapper.selectMemberList();
+//    	UserVO vo = new UserVO();
+//    	List<MemberVO> list = mapper.doLoginList(vo);
+//        
+//        for(int i=0; i<list.size(); i++){
+//            System.out.println("name : " + list.get(i).getName());
+//            System.out.println("resno : " + list.get(i).getResno());
+//        }        
+//       
+//        ObjectMapper mapper = new ObjectMapper();
+//        
+//        String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
+//        
+//        System.out.println("json : " + json);        
+//        
+//		
+//		logger.trace("trace -- Hello world.");
+//		logger.debug("debug -- Hello world.");
+//		logger.info("info -- Hello world.");
+//		logger.warn("warn -- Hello world.");
+//		logger.error("error -- Hello world.");
+//  
+//        return list;
+    	
+    	return null;
     }
 }

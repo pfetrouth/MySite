@@ -17,8 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mysite.work.login.controller.RestfulAPISample;
-import com.mysite.work.login.vo.MemberVO;
+import com.mysite.work.user.vo.UserVO;
 
 public class CORSFilter implements Filter {
 
@@ -26,7 +25,7 @@ public class CORSFilter implements Filter {
 
 	private List<String> whiteList;
 	private List<String> resourceList;
-	private boolean filterYn = false;
+	private boolean filterYn = true;
 
 	public CORSFilter() {
 
@@ -34,7 +33,9 @@ public class CORSFilter implements Filter {
 		// whiteList.add("/");
 		whiteList.add("/loginMain");
 		whiteList.add("/user/loginPost");
-		whiteList.add("/board/getBoardList");
+		whiteList.add("/login/login");
+		whiteList.add("/login/doLogin");
+		//whiteList.add("/board/getBoardList");
 		whiteList.add("/health");
 
 		resourceList = new ArrayList<String>();
@@ -74,11 +75,11 @@ public class CORSFilter implements Filter {
 
 					HttpServletRequest hsreq = (HttpServletRequest) request;
 					HttpSession session = hsreq.getSession();
-					MemberVO vo = (MemberVO) session.getAttribute("memberInfo");
+					UserVO vo = (UserVO) session.getAttribute("memberInfo");
 					logger.debug("vo :" + vo);
 
 					if (vo == null) {
-						res.sendRedirect("loginMain");
+						res.sendRedirect("/login/login");
 						return;
 					}
 				}
