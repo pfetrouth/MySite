@@ -10,10 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 //@SpringBootApplication(scanBasePackages={"com.mysite.work"})
 @SpringBootApplication
+//@EnableRedisHttpSession
 @MapperScan(value= {"com.mysite.work.mapper"})
 
 public class BootGradleMysiteApplication {

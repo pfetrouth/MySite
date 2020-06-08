@@ -1,0 +1,28 @@
+spring:
+       datasource:
+                  driver-class-name : com.mysql.jdbc.Driver
+                  url : jdbc:mysql://localhost:3306/com01?allowPublicKeyRetrieval=true&useSSL=false
+                  username : root
+                  password : trouth2897!@
+                    
+       mvc:
+           view :
+                 prefix : /WEB-INF/views
+                 suffix : .jsp
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  session:
+    timeout: 600
+    store-type: redis
+    redis:
+      flush-mode: on-save
+      namespace: spring:session
+
+
+logging : 
+         level :
+                 root : info
+
+

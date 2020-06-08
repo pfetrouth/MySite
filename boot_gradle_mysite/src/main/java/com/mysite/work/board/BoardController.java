@@ -1,7 +1,13 @@
 package com.mysite.work.board;
 
-import javax.inject.Inject;
+import java.util.Enumeration;
 
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,20 +25,30 @@ import com.mysite.work.common.vo.Search;
 @RequestMapping(value = "/board")
 public class BoardController {
 
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	
 	@Inject
-	private BoardService boardService; 
+	private BoardService boardService;
+	
+	
+	
+//	@Autowired
+//    RedisTemplate<String, Object> redisTemplate;
 
 	@RequestMapping(value = "/getBoardList", method = RequestMethod.GET)
 	public String getBoardList(Model model
 			, @RequestParam(required = false, defaultValue = "1") int page
 			, @RequestParam(required = false, defaultValue = "1") int range
 			, @RequestParam(required = false, defaultValue = "title") String searchType
-			, @RequestParam(required = false) String keyword		) throws Exception {
+			, @RequestParam(required = false) String keyword		
+			, HttpServletRequest resquest 
+			, HttpServletResponse response ) throws Exception {
 		
 		Search search = new Search();
 		search.setSearchType(searchType);
 		search.setKeyword(keyword);
-
+		
+		
 		//전체 게시글 개수
 		int listCnt = boardService.getBoardListCnt(search);
 		//Pagination 객체생성

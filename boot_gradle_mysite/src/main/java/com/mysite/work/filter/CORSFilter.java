@@ -10,12 +10,15 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import com.mysite.work.user.vo.UserVO;
 
@@ -26,6 +29,9 @@ public class CORSFilter implements Filter {
 	private List<String> whiteList;
 	private List<String> resourceList;
 	private boolean filterYn = true;
+	
+	@Autowired
+    RedisTemplate<String, Object> redisTemplate;
 
 	public CORSFilter() {
 
@@ -35,7 +41,7 @@ public class CORSFilter implements Filter {
 		whiteList.add("/user/loginPost");
 		whiteList.add("/login/login");
 		whiteList.add("/login/doLogin");
-		//whiteList.add("/board/getBoardList");
+		whiteList.add("/board/getBoardList");
 		whiteList.add("/health");
 
 		resourceList = new ArrayList<String>();
@@ -55,7 +61,7 @@ public class CORSFilter implements Filter {
 		boolean isURIResouceFile = false;
 
 		String uri = req.getRequestURI();
-		logger.debug("uri :" + uri);
+		logger.debug("###CORSFilter URL : {}",uri);
 
 		if (filterYn) {
 
@@ -71,18 +77,7 @@ public class CORSFilter implements Filter {
 					}
 				}
 				logger.debug("isURIResouceFile :" + isURIResouceFile);
-				if (!isURIResouceFile) {
-
-					HttpServletRequest hsreq = (HttpServletRequest) request;
-					HttpSession session = hsreq.getSession();
-					UserVO vo = (UserVO) session.getAttribute("memberInfo");
-					logger.debug("vo :" + vo);
-
-					if (vo == null) {
-						res.sendRedirect("/login/login");
-						return;
-					}
-				}
+				if(isURIResouceFile) { return;}
 			}
 
 		}

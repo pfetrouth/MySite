@@ -1,6 +1,7 @@
 package com.mysite.work.user.vo;
 
 public class UserVO {
+	String serialVersionUID ;
 	String uid;
 	String name;
 	String pwd;
@@ -52,7 +53,13 @@ public class UserVO {
 	}
 	@Override
 	public String toString() {
-		return "UserVO [uid=" + uid + ", name=" + name + ", pwd=" + pwd + ", re_pwd=" + re_pwd + ", email=" + email
-				+ ", grade=" + grade + ", reg_dt=" + reg_dt + "]";
+		return "UserVO [serialVersionUID=" + serialVersionUID + ", uid=" + uid + ", name=" + name + ", pwd=" + pwd
+				+ ", re_pwd=" + re_pwd + ", email=" + email + ", grade=" + grade + ", reg_dt=" + reg_dt + "]";
+	}
+	public String getSerialVersionUID() {
+		return serialVersionUID;
+	}
+	public void setSerialVersionUID(String serialVersionUID) {
+		this.serialVersionUID = serialVersionUID;
 	}
 }
